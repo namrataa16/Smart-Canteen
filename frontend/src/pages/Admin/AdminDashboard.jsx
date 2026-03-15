@@ -19,6 +19,12 @@ const AdminDashboard = () => {
       try {
         const { data } = await api.get('/api/orders/admin');
         
+        if (!data || !Array.isArray(data)) {
+          console.warn('Admin stats: expected array but got:', data);
+          setStats({ totalOrders: 0, totalSales: 0, pendingOrders: 0, popularItems: [] });
+          return;
+        }
+
         const totalOrders = data.length;
         const totalSales = data.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
         const pendingOrders = data.filter(o => o.orderStatus !== 'Ready').length;
@@ -27,7 +33,9 @@ const AdminDashboard = () => {
         const itemCounts = {};
         data.forEach(order => {
           order.orderedItems?.forEach(item => {
-            itemCounts[item.name] = (itemCounts[item.name] || 0) + item.quantity;
+            const itemName = item.name || item.productName || 'Unknown';
+            const itemQty = item.quantity || item.qty || 1;
+            itemCounts[itemName] = (itemCounts[itemName] || 0) + itemQty;
           });
         });
         
@@ -38,6 +46,7 @@ const AdminDashboard = () => {
 
         setStats({ totalOrders, totalSales, pendingOrders, popularItems });
       } catch (err) {
+        console.error('Admin stats error:', err);
         toast.error('Failed to load dashboard statistics.');
       } finally {
         setLoading(false);

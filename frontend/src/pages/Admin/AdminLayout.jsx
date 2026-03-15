@@ -1,9 +1,18 @@
 import React, { useContext } from 'react';
-import { NavLink, Outlet, Navigate } from 'react-router-dom';
+import { NavLink, Outlet, Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const AdminLayout = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout, loading } = useContext(AuthContext);
+  const location = useLocation();
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="spinner"></div>
+      </div>
+    );
+  }
 
   if (!user || user.role !== 'admin') {
     return <Navigate to="/" replace />;
@@ -57,7 +66,27 @@ const AdminLayout = () => {
 
       {/* Main Content Area */}
       <main className="admin-main">
-        <Outlet />
+        <header className="admin-header">
+          <div className="admin-header-left">
+            <h2 className="admin-page-title">
+              {location.pathname === '/admin' ? 'Dashboard Overview' : 
+               location.pathname.includes('menu') ? 'Menu Management' : 
+               'Order Management'}
+            </h2>
+          </div>
+          <div className="admin-header-right">
+            <div className="admin-profile">
+              <span className="admin-name">Logged in as: <strong>{user?.name}</strong></span>
+              <button onClick={logout} className="nav-logout" style={{ marginLeft: '1rem' }}>
+                Logout
+              </button>
+            </div>
+          </div>
+        </header>
+        
+        <div className="admin-content">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

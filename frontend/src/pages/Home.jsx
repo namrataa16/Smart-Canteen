@@ -1,9 +1,15 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext';
 
 const Home = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+
+  if (loading) return null;
+
+  if (user?.role === 'admin') {
+    return <Navigate to="/admin" replace />;
+  }
 
   const categories = [
     { icon: '🍛', name: 'Meals', desc: 'Hearty rice, rotis & combos', color: '#16a34a' },
@@ -44,9 +50,9 @@ const Home = () => {
         </p>
 
         <div className="hero-buttons">
-          <Link to="/menu">
+          <Link to={user?.role === 'admin' ? '/admin' : '/menu'}>
             <button className="btn-primary" style={{ padding: '0.85rem 2.2rem', fontSize: '1rem' }}>
-              🍽️ Order Now
+              {user?.role === 'admin' ? '📊 Go to Dashboard' : '🍽️ Order Now'}
             </button>
           </Link>
           {!user && (
@@ -83,7 +89,7 @@ const Home = () => {
 
         <div className="grid-4">
           {categories.map((cat, i) => (
-            <Link to="/menu" key={cat.name}>
+            <Link to={user?.role === 'admin' ? '/admin' : '/menu'} key={cat.name}>
               <div
                 className="card-elevated fade-in"
                 style={{
@@ -161,9 +167,9 @@ const Home = () => {
               <div style={{ fontWeight: '800', fontSize: '1.2rem', color: 'var(--primary)', marginBottom: '1rem' }}>
                 ₹{item.price}
               </div>
-              <Link to="/menu">
+              <Link to={user?.role === 'admin' ? '/admin' : '/menu'}>
                 <button className="btn-primary" style={{ padding: '0.45rem 1.2rem', fontSize: '0.8rem' }}>
-                  View in Menu
+                  {user?.role === 'admin' ? 'Manage' : 'View in Menu'}
                 </button>
               </Link>
             </div>

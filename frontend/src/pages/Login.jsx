@@ -21,7 +21,12 @@ const Login = () => {
       const { data } = await api.post('/api/auth/login', { email, password });
       login(data);
       toast.success(`Welcome back, ${data.name}! 👋`, { id: toastId });
-      navigate('/menu');
+      
+      if (data.role === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/menu');
+      }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed. Please check your credentials.', { id: toastId });
     } finally {

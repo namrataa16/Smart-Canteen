@@ -11,13 +11,16 @@ async function seed() {
   await mongoose.connect(MONGO_URI);
   console.log('Connected to MongoDB');
 
-  // Make superadmin an actual admin
-  const adminUpdated = await User.findOneAndUpdate(
-    { email: 'superadmin@canteen.com' },
-    { role: 'admin' },
-    { new: true }
-  );
-  if (adminUpdated) console.log('Admin role set for:', adminUpdated.email);
+  // Ensure superadmin exists and is an admin with hashed password
+  await User.deleteMany({ email: 'superadmin@canteen.com' });
+  const adminUser = await User.create({
+    name: 'Super Admin',
+    email: 'superadmin@canteen.com',
+    password: 'password123',
+    role: 'admin'
+  });
+  console.log('Admin user created and hashed:', adminUser.email);
+  console.log('Hashed password in DB:', adminUser.password);
 
   // Clear and seed food items
   await FoodItem.deleteMany({});

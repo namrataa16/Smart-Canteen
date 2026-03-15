@@ -1026,3 +1026,36 @@
     height: 70px;
   }
 }
+
+
+/* Admin Dashboard Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-page-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--secondary);
+  margin: 0;
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.admin-content {
+  animation: fadeIn 0.4s ease-out;
+}

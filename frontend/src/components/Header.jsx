@@ -20,16 +20,16 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   const navItems = [
-    { to: '/menu', label: 'Menu' },
-    ...(user ? [{ to: '/orders', label: 'My Orders' }] : []),
-    ...(user?.role === 'admin' ? [{ to: '/admin', label: 'Admin' }] : []),
+    ...(user?.role !== 'admin' ? [{ to: '/menu', label: 'Menu' }] : []),
+    ...(user && user.role !== 'admin' ? [{ to: '/orders', label: 'My Orders' }] : []),
+    ...(user?.role === 'admin' ? [{ to: '/admin', label: 'Dashboard' }] : []),
   ];
 
   return (
     <header className="glass navbar">
       <div className="navbar-inner">
         {/* Logo */}
-        <Link to="/" className="nav-logo" onClick={() => setMobileOpen(false)}>
+        <Link to={user?.role === 'admin' ? '/admin' : '/'} className="nav-logo" onClick={() => setMobileOpen(false)}>
           <span className="logo-icon">🍽️</span>
           <span className="logo-text">Smart Canteen</span>
         </Link>
@@ -52,11 +52,13 @@ const Header = () => {
         <div className="nav-right">
           {user ? (
             <>
-              {/* Cart */}
-              <Link to="/cart" className="nav-cart">
-                <span>🛒</span>
-                {totalQty > 0 && <span className="badge">{totalQty}</span>}
-              </Link>
+              {/* Cart - Only show for students/guests */}
+              {user?.role !== 'admin' && (
+                <Link to="/cart" className="nav-cart">
+                  <span>🛒</span>
+                  {totalQty > 0 && <span className="badge">{totalQty}</span>}
+                </Link>
+              )}
 
               {/* User Info */}
               <div className="nav-user">
