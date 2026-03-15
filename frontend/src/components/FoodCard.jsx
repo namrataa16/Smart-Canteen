@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../contexts/CartContext';
 import { AuthContext } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+
 
 const categoryColors = {
   Snacks: { bg: 'rgba(245, 158, 11, 0.08)', text: '#d97706', border: 'rgba(245, 158, 11, 0.2)' },
@@ -54,20 +56,28 @@ const FoodCard = ({ product }) => {
 
       {/* Content */}
       <div className="food-card-body">
-        <h3 className="food-card-title">{product.name}</h3>
-        <p className="food-card-desc">{product.description}</p>
-        <div className="food-card-footer">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
+          <h3 className="food-card-title">{product.name}</h3>
           <span className="food-card-price">₹{product.price}</span>
+        </div>
+        <p className="food-card-desc">{product.description}</p>
+        
+        <div className="food-card-footer">
           {user ? (
             <button
               onClick={handleAdd}
               disabled={!product.availability}
-              className="food-card-add"
+              className="btn-primary"
+              style={{ width: '100%', padding: '0.6rem', fontSize: '0.85rem' }}
             >
-              + Add
+              🛒 Add to Cart
             </button>
           ) : (
-            <span className="food-card-login">Login to order</span>
+            <Link to="/login" style={{ width: '100%' }}>
+              <button className="btn-secondary" style={{ width: '100%', padding: '0.6rem', fontSize: '0.85rem' }}>
+                Login to Order
+              </button>
+            </Link>
           )}
         </div>
       </div>

@@ -26,14 +26,19 @@ async function seed() {
   await FoodItem.deleteMany({});
 
   const items = [
-    { name: 'Samosa', price: 15, category: 'Snacks', description: 'Crispy deep-fried pastry with spiced potato filling', availability: true, image: 'https://placehold.co/300x200?text=Samosa' },
-    { name: 'Vada Pav', price: 20, category: 'Snacks', description: 'Mumbai-style spicy potato fritter in a bread roll', availability: true, image: 'https://placehold.co/300x200?text=Vada+Pav' },
-    { name: 'Masala Chai', price: 10, category: 'Beverages', description: 'Aromatic spiced Indian milk tea', availability: true, image: 'https://placehold.co/300x200?text=Masala+Chai' },
-    { name: 'Cold Coffee', price: 35, category: 'Beverages', description: 'Refreshing blended iced coffee drink', availability: true, image: 'https://placehold.co/300x200?text=Cold+Coffee' },
-    { name: 'Dal Rice', price: 60, category: 'Meals', description: 'Wholesome lentil soup served with steamed basmati rice', availability: true, image: 'https://placehold.co/300x200?text=Dal+Rice' },
-    { name: 'Paneer Butter Masala', price: 80, category: 'Meals', description: 'Creamy cottage cheese curry with butter gravy', availability: true, image: 'https://placehold.co/300x200?text=Paneer' },
-    { name: 'Gulab Jamun', price: 25, category: 'Desserts', description: 'Soft milk-solid balls soaked in rose-flavored sugar syrup', availability: true, image: 'https://placehold.co/300x200?text=Gulab+Jamun' },
-    { name: 'Kulfi', price: 30, category: 'Desserts', description: 'Traditional Indian frozen dessert with pistachio', availability: true, image: 'https://placehold.co/300x200?text=Kulfi' },
+    { name: 'Samosa', price: 15, category: 'Snacks', description: 'Crispy deep-fried pastry with spiced potato filling', availability: true, image: 'https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=600' },
+    { name: 'Vada Pav', price: 20, category: 'Snacks', description: 'Mumbai-style spicy potato fritter in a bread roll', availability: true, image: 'https://images.unsplash.com/photo-1606491956391-70868b5d0f47?q=80&w=600' },
+    { name: 'Pizza', price: 120, category: 'Meals', description: 'Delicious cheesy pizza with fresh toppings', availability: true, image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600' },
+    { name: 'Sandwich', price: 50, category: 'Snacks', description: 'Grilled vegetable sandwich with mint chutney', availability: true, image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600' },
+    { name: 'Maggi', price: 40, category: 'Snacks', description: 'Everyone\'s favorite masala noodles', availability: true, image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?q=80&w=600' },
+    { name: 'French Fries', price: 60, category: 'Snacks', description: 'Crispy golden potato fries', availability: true, image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600' },
+    { name: 'Masala Chai', price: 10, category: 'Beverages', description: 'Aromatic spiced Indian milk tea', availability: true, image: 'https://images.unsplash.com/photo-1561336313-0bd5e0b27ec8?q=80&w=600' },
+    { name: 'Coffee', price: 25, category: 'Beverages', description: 'Rich brewed hot coffee', availability: true, image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=600' },
+    { name: 'Cold Coffee', price: 35, category: 'Beverages', description: 'Refreshing blended iced coffee drink', availability: true, image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?q=80&w=600' },
+    { name: 'Paneer Butter Masala', price: 80, category: 'Meals', description: 'Creamy cottage cheese curry with butter gravy', availability: true, image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=600' },
+    { name: 'Dal Rice', price: 60, category: 'Meals', description: 'Wholesome lentil soup served with steamed rice', availability: true, image: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?q=80&w=600' },
+    { name: 'Gulab Jamun', price: 25, category: 'Desserts', description: 'Soft milk-solid balls in sugar syrup', availability: true, image: 'https://images.unsplash.com/photo-1548610762-7c6afe24c261?q=80&w=600' },
+    { name: 'Kulfi', price: 30, category: 'Desserts', description: 'Traditional Indian frozen dessert', availability: true, image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=600' },
   ];
 
   const created = await FoodItem.insertMany(items);

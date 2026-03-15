@@ -26,7 +26,8 @@ const authUser = async (req, res) => {
 // @route   POST /api/auth/register
 // @access  Public
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, studentId, phone, department, year } = req.body;
+
 
   const userExists = await User.findOne({ email });
 
@@ -39,7 +40,12 @@ const registerUser = async (req, res) => {
     name,
     email,
     password,
+    studentId,
+    phone,
+    department,
+    year,
   });
+
 
   if (user) {
     res.status(201).json({
