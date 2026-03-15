@@ -412,7 +412,7 @@ select.input-field {
 
 .grid-auto {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1.5rem;
 }
 
@@ -471,6 +471,10 @@ select.input-field {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-3 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
+  .grid-auto {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
   .page-container, .page-container-sm {
     padding: 1.5rem 1rem;
   }
@@ -485,6 +489,7 @@ select.input-field {
     grid-template-columns: 1fr;
   }
 }
+
 /* ===== FOOD CARD ENHANCEMENTS ===== */
 .food-card {
   background: var(--bg-white);
